@@ -30,7 +30,8 @@ platforms:
     pre_build_image: true
 
   - name: fedora36
-    image: docker.io/geerlingguy/docker-fedora36-ansible
+    #    image: docker.io/geerlingguy/docker-fedora36-ansible
+    image: localhost/fedora36-ansible-nonroot
     tmpfs:
       - /run
       - /tmp
@@ -42,8 +43,7 @@ platforms:
     pre_build_image: true
 
   - name: fedora37
-    #image: docker.io/geerlingguy/docker-fedora37-ansible
-    image: localhost/fedora37-ansible
+    image: docker.io/geerlingguy/docker-fedora37-ansible
     tmpfs:
       - /run
       - /tmp
@@ -79,10 +79,6 @@ platforms:
     pre_build_image: true
 provisioner:
   name: ansible
-  inventory:
-    host_vars:
-      fedora37:
-        ansible_user: ansible
   config_options:
     defaults:
       interpreter_python: auto_silent
