@@ -2,7 +2,7 @@
 - name: MANAGE CONFIGURATION
   ansible.builtin.template:
     force: "{{ taskwarrior_config_file_overwrite }}"
-    dest:  "{{ taskwarrior_config_file }}"
+    dest: "{{ taskwarrior_config_file }}"
     src: 'taskrc.j2'
     owner: "{{ taskwarrior_user }}"
     group: "{{ taskwarrior_group }}"

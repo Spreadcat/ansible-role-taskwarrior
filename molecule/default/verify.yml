@@ -8,87 +8,87 @@
     USER: root
 
   tasks:
-  - ansible.builtin.include_vars:
-      file: "../../defaults/main.yml"
-  - ansible.builtin.include_vars:
-      file: "../../defaults/{{ ansible_distribution|lower }}.yml"
-  - ansible.builtin.include_vars:
-      file: "./variables.yml"
+    - ansible.builtin.include_vars:
+        file: "../../defaults/main.yml"
+    - ansible.builtin.include_vars:
+        file: "../../defaults/{{ ansible_distribution|lower }}.yml"
+    - ansible.builtin.include_vars:
+        file: "./variables.yml"
 
-  - name: CHECK TASKWARRIOR VERSION
-    command: task --version
-    changed_when: false
-    register: _task_version
+    - name: CHECK TASKWARRIOR VERSION
+      command: task --version
+      changed_when: false
+      register: _task_version
 
-  - name: ASSERT INSTALLATION
-    ansible.builtin.assert:
-      quiet: true
-      that: _task_version.rc == 0
+    - name: ASSERT INSTALLATION
+      ansible.builtin.assert:
+        quiet: true
+        that: _task_version.rc == 0
 
-  - name: DATA DIR CHECK
-    ansible.builtin.stat:
-      path: "{{ taskwarrior_data_dir }}"
-    register: _taskwarrior_data_dir
+    - name: DATA DIR CHECK
+      ansible.builtin.stat:
+        path: "{{ taskwarrior_data_dir }}"
+      register: _taskwarrior_data_dir
 
-  - name: ASSERT DATADIR
-    ansible.builtin.assert:
-      quiet: true
-      that:
-        - _taskwarrior_data_dir.stat.exists
-        - _taskwarrior_data_dir.stat.writeable
-        - _taskwarrior_data_dir.stat.uid == 0
-        - _taskwarrior_data_dir.stat.gid == 0
-        - _taskwarrior_data_dir.stat.mode == '0755'
+    - name: ASSERT DATADIR
+      ansible.builtin.assert:
+        quiet: true
+        that:
+          - _taskwarrior_data_dir.stat.exists
+          - _taskwarrior_data_dir.stat.writeable
+          - _taskwarrior_data_dir.stat.uid == 0
+          - _taskwarrior_data_dir.stat.gid == 0
+          - _taskwarrior_data_dir.stat.mode == '0755'
 
-  - name: CONFIG FILE CHECK
-    ansible.builtin.stat:
-      path: "{{ taskwarrior_config_file }}"
-    register: _tw_config_file
+    - name: CONFIG FILE CHECK
+      ansible.builtin.stat:
+        path: "{{ taskwarrior_config_file }}"
+      register: _tw_config_file
 
-  - name: ASSERT CONFIG FILE
-    ansible.builtin.assert:
-      quiet: true
-      that:
-        - _tw_config_file.stat.exists
-        - _tw_config_file.stat.uid == 0
-        - _tw_config_file.stat.gid == 0
-        - _tw_config_file.stat.mode == '0755'
-        - _tw_config_file.stat.writeable
+    - name: ASSERT CONFIG FILE
+      ansible.builtin.assert:
+        quiet: true
+        that:
+          - _tw_config_file.stat.exists
+          - _tw_config_file.stat.uid == 0
+          - _tw_config_file.stat.gid == 0
+          - _tw_config_file.stat.mode == '0755'
+          - _tw_config_file.stat.writeable
 
-  - name: VERIFY CONFIG FILE CONTENT
-    lineinfile:
-      name: "{{ taskwarrior_config_file }}"
-      line: "{{ item }}"
-      state: present
-    check_mode: yes
-    register: conf
-    failed_when: (conf is changed) or (conf is failed)
-    loop:
-      - "data.location={{ taskwarrior_data_dir }}"
-      - "# Contexts"
-      - "# Default context"
-      - "context=test1"
-      - "# Color sets"
-      - "include /usr/share/task/dark-256.theme"
-      - "# Config settings"
-      - "## Disable case-sensitivity for search"
-      - "search.case.sensitive=no"
-      - "context.test1.read=+test1"
-      - "context.test1.write=+test1"
-      - "context.test2.read=+test2"
-      - "context.test2.write=+test2"
-      - "context.test3.read=+alias1 +alias2 +alias3"
-      - "context.test3.write=+alias1 +alias2 +alias3"
-      - "context.test4.read=+alias4 +alias5"
-      - "context.test4.write=+alias4 +alias5"
-      - "context.test5.read=+alias6 or +alias7"
-      - "context.test5.write=+alias6 and +alias7 and +alias8"
+    - name: VERIFY CONFIG FILE CONTENT
+      lineinfile:
+        name: "{{ taskwarrior_config_file }}"
+        line: "{{ item }}"
+        state: present
+      check_mode: true
+      register: conf
+      failed_when: (conf is changed) or (conf is failed)
+      loop:
+        - "data.location={{ taskwarrior_data_dir }}"
+        - "# Contexts"
+        - "# Default context"
+        - "context=test1"
+        - "# Color sets"
+        - "include /usr/share/task/dark-256.theme"
+        - "# Config settings"
+        - "## Disable case-sensitivity for search"
+        - "search.case.sensitive=no"
+        - "context.test1.read=+test1"
+        - "context.test1.write=+test1"
+        - "context.test2.read=+test2"
+        - "context.test2.write=+test2"
+        - "context.test3.read=+alias1 +alias2 +alias3"
+        - "context.test3.write=+alias1 +alias2 +alias3"
+        - "context.test4.read=+alias4 +alias5"
+        - "context.test4.write=+alias4 +alias5"
+        - "context.test5.read=+alias6 or +alias7"
+        - "context.test5.write=+alias6 and +alias7 and +alias8"
 
-  - name: VERIFY BASH COMPLETION SCRIPT IS AVAILABLE
-    ansible.builtin.file:
-      name: /usr/share/bash-completion/completions/tasks.sh
-      owner: root
-      group: root
-      mode: 0644
-    register: _verify_file
-    failed_when: (_verify_file is changed) or (_verify_file is failed)
+    - name: VERIFY BASH COMPLETION SCRIPT IS AVAILABLE
+      ansible.builtin.file:
+        name: /usr/share/bash-completion/completions/tasks.sh
+        owner: root
+        group: root
+        mode: 0644
+      register: _verify_file
+      failed_when: (_verify_file is changed) or (_verify_file is failed)

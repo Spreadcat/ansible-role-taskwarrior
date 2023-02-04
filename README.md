@@ -1,30 +1,78 @@
-# spreadcat.rolename
+# spreadcat.taskwarrior
 
-Some general description of this role.
+An Ansible role to install and manage [Taskwarrior](https://taskwarrior.org) on a host.
 
 ## Requirements
 
-The general requirements, like access or other stuff.
+* None
 
 ## Role Variables
 
-Available variables are listed below, along with default values (see `defaults/main.yml`):
+See `./defaults/main.yml` for usage examples.
 
 ```yaml
-var1: value1
+taskwarrior_data_dir: "{{ lookup('env', 'HOME') }}/.task"
 ```
 
-Some variable description.
+* String with the path to the location of the datadir for Taskwarrior.
+
+```yaml
+taskwarrior_contexts:: {}
+```
+
+* List with either the strings of contexts or dictionaries with context names and related tags for Taskwarrior.
+
+```yaml
+taskwarrior_context_default: ""
+```
+
+* String with the default context.
+
+```yaml
+taskwarrior_config:
+```
+
+* Dictionary with the configuration settings for taskwarrior.
 
 ## Other variables
 
-Second class variables, not immediately needed.
-
 ```yaml
-var1: value1
+taskwarrior_package:
+  - task
+  - vit
 ```
 
-Some variable description.
+* List of packages to install for taskwarrior.
+
+```yaml
+taskwarrior_config_file: "{{ lookup('env', 'HOME') }}/.taskrc"
+```
+
+* String with the path to the location of the Taskwarrior configuration file.
+
+```yaml
+taskwarrior_group: "{{ lookup('env', 'USER') }}"
+```
+
+* Name of the group of the user that is using Taskwarrior.
+
+```yaml
+taskwarrior_user: "{{ lookup('env', 'USER') }}"
+```
+
+* String with the username of the user that is using Taskwarrior.
+
+```yaml
+taskwarrior_color_set: ""
+```
+
+* String with the color set to use for Taskwarrior.
+
+```yaml
+taskwarrior_config_file_overwrite: true
+```
+
+* Boolean to allow to overwrite any existing configuration file for Taskwarrior.
 
 ## Dependencies
 
