@@ -1,7 +1,10 @@
 ---
-# tasks files
-
-- include_tasks: install.yml
-- include_tasks: config.yml
-- include_tasks: service.yml
-...
+# tasks file for taskwarrior
+#
+- name: INCLUDE VARIABLE FILE
+  ansible.builtin.include_vars:
+    file: "./defaults/{{ ansible_distribution|lower }}.yml"
+- name: INCLUDE INSTALL TASKS
+  ansible.builtin.include_tasks: install.yml
+- name: INCLUDE CONFIG TASKS
+  ansible.builtin.include_tasks: config.yml

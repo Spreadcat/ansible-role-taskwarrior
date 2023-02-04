@@ -1,0 +1,47 @@
+#jinja2: lstrip_blocks: "True", trim_blocks: "True"
+# Ansible managed
+
+# Data location
+data.location={{ taskwarrior_data_dir }}
+
+# Contexts
+{% if taskwarrior_contexts|length > 0 -%}
+  {% for entry in taskwarrior_contexts -%}
+    {% if entry is not string and entry.tags is defined -%}
+      {# read setting #}context.{{ entry.name }}.read={{ entry.tags }}
+      {# write settings #}context.{{ entry.name }}.write={{ entry.tags }}
+    {% elif entry.read is defined and entry.write is defined -%}
+      {# read setting #}context.{{ entry.name }}.read={{ entry.read }}
+      {# write settings #}context.{{ entry.name }}.write={{ entry.write }}
+    {% else -%}
+      {# read setting #}context.{{ entry }}.read=+{{ entry }}
+      {# write setting #}context.{{- entry }}.write=+{{ entry }}
+    {% endif %}
+  {% endfor -%}
+{% endif %}
+
+# Default context
+{% if taskwarrior_context_default|length > 0 -%}
+context={{ taskwarrior_context_default }}
+{% else -%}
+# None
+{% endif %}
+
+# Color sets
+{% if taskwarrior_color_set|length > 0 -%}
+include /usr/share/task/{{ taskwarrior_color_set }}
+{% else -%}
+# None
+{% endif %}
+
+# Config settings
+{% if taskwarrior_config|length > 0 -%}
+  {% for entry in taskwarrior_config -%}
+    {% if 'comment' in entry -%}
+      ## {{ entry.comment }}
+    {% endif -%}
+    {{ entry.setting }}={{ entry.value }}
+  {% endfor %}
+{% else -%}
+# None
+{% endif %}

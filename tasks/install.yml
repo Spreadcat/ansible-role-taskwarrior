@@ -1,2 +1,27 @@
 ---
-# Install tasks for this roles
+- name: INCLUDE UBUNTU INSTALL
+  ansible.builtin.include_tasks: install_ubuntu.yml
+  when: ansible_distribution|lower == 'ubuntu'
+
+- name: MANAGE PACKAGES
+  become: true
+  ansible.builtin.package:
+    name: "{{ taskwarrior_package }}"
+
+- name: MANAGE DIRECTORIES
+  ansible.builtin.file:
+    state: directory
+    path: "{{ taskwarrior_data_dir }}"
+    owner: "{{ taskwarrior_user }}"
+    group: "{{ taskwarrior_group }}"
+    mode: '0755'
+
+- name: INSTALL BASH COMPLETION
+  become: true
+  ansible.builtin.copy:
+    src: files/tasks.sh
+    dest: /usr/share/bash-completion/completions/tasks.sh
+    owner: root
+    group: root
+    mode: '0644'
+  when: taskwarrior_skip_bash_completion
