@@ -1,0 +1,5 @@
+---
+taskwarrior_package:
+  - taskwarrior
+  - bash-completion
+  - vit

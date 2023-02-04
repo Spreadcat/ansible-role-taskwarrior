@@ -1,0 +1,55 @@
+---
+# defaults file for taskwarrior
+#
+taskwarrior_package:
+  - task
+  - vit
+
+# Path to the task configuration file
+taskwarrior_config_file: "{{ lookup('env', 'HOME') }}/.taskrc"
+
+taskwarrior_group: "{{ lookup('env', 'USER') }}"
+
+# User for task
+taskwarrior_user: "{{ lookup('env', 'USER') }}"
+
+# Location of the data directory for task
+taskwarrior_data_dir: "{{ lookup('env', 'HOME') }}/.task"
+
+# contexts for Taskwarrior to configure
+# can be either list, list or mixed:
+# Example
+# taskwarrior_contexts:
+#   - context_a
+#   - context_b
+#   - name: context_c
+#     tags: +alias_1 or +alias_2 or +alias_3
+taskwarrior_contexts: {}
+
+# Default context, must be an element of taskwarrior_contexts
+taskwarrior_context_default: ''
+
+# Alternative color set to use
+# select from these values:
+#
+# light-16.theme
+# light-256.theme
+# dark-16.theme
+# dark-256.theme
+# dark-red-256.theme
+# dark-green-256.theme
+# dark-blue-256.theme
+# dark-violets-256.theme
+# dark-yellow-green.theme
+# dark-gray-256.theme
+# dark-gray-blue-256.theme
+# solarized-dark-256.theme
+# solarized-light-256.theme
+# no-color.theme
+taskwarrior_color_set: ''
+
+# Default config for taskwarrior
+taskwarrior_config: {}
+
+# Allow to overwrite an existing config file
+taskwarrior_config_file_overwrite: true
