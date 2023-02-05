@@ -1,0 +1,19 @@
+---
+# This is an example playbook to execute Ansible tests.
+- name: Verify
+  hosts: all
+  gather_facts: false
+  environment:
+    HOME: /root
+    USER: root
+
+  tasks:
+    - name: VERIFY BASH COMPLETION SCRIPT IS AVAILABLE
+      ansible.builtin.file:
+        name: /usr/share/bash-completion/completions/tasks.sh
+        owner: root
+        group: root
+        mode: 0644
+        state: absent
+      register: _verify_file
+      failed_when: (_verify_file is changed) or (_verify_file is failed)

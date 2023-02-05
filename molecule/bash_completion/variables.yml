@@ -1,0 +1,23 @@
+---
+# Variable for this specific molecule run
+taskwarrior_user: root
+taskwarrior_group: root
+taskwarrior_config_file: '/root/.taskrc'
+taskwarrior_data_dir: '/root/.task'
+taskwarrior_contexts:
+  - test1
+  - test2
+  - name: test3
+    tags: '+alias1 +alias2 +alias3'
+  - name: test4
+    tags: '+alias4 +alias5'
+  - name: test5
+    read: '+alias6 or +alias7'
+    write: '+alias6 and +alias7 and +alias8'
+
+taskwarrior_context_default: test1
+taskwarrior_color_set: dark-256.theme
+taskwarrior_config:
+  - setting: search.case.sensitive
+    value: !!str no
+    comment: Disable case-sensitivity for search

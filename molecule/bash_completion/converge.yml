@@ -1,0 +1,13 @@
+---
+- name: Converge
+  hosts: all
+  tasks:
+    - ansible.builtin.include_vars:
+        file: "./variables.yml"
+    - name: "Include spreadcat.taskwarrior"
+      ansible.builtin.include_role:
+        name: "spreadcat.taskwarrior"
+      vars:
+        taskwarrior_skip_bash_completion: true
+        taskwarrior_contexts: []
+        taskwarrior_config: []
