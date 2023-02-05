@@ -22,4 +22,4 @@ taskwarrior_config:
     value: !!str no
     comment: Disable case-sensitivity for search
 
-taskwarrior_skip_bash_completion: true
+taskwarrior_skip_bash_completion: false
