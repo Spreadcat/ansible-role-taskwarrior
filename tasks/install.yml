@@ -24,4 +24,4 @@
     owner: root
     group: root
     mode: '0644'
-  when: taskwarrior_skip_bash_completion
+  when: not taskwarrior_skip_bash_completion

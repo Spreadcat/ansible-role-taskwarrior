@@ -74,6 +74,12 @@ taskwarrior_config_file_overwrite: true
 
 * Boolean to allow to overwrite any existing configuration file for Taskwarrior.
 
+```yaml
+taskwarrior_skip_bash_completion: false
+```
+
+* Boolean that will skip the installation of the bash-completion for taskwarrior when set to `true`.
+
 ## Dependencies
 
 None

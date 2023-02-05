@@ -53,3 +53,6 @@ taskwarrior_config: {}
 
 # Allow to overwrite an existing config file
 taskwarrior_config_file_overwrite: true
+
+# Skip installing bash complettion
+taskwarrior_skip_bash_completion: false
