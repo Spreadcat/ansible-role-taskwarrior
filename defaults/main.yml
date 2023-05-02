@@ -1,10 +1,10 @@
 ---
-# defaults file for taskwarrior
+# defaults file for Taskwarrior
 
-# List of packages to install for taskwarrior.
+# List of packages to install for Taskwarrior.
 #
 # Example:
-#   taskwarrior_poackage:
+#   taskwarrior_package:
 #     - task
 #     - vit
 #
@@ -22,7 +22,7 @@ taskwarrior_package:
 # doca tag:role
 taskwarrior_config_file: "{{ lookup('env', 'HOME') }}/.taskrc"
 
-# Groupname of the group that will own the taskwarrior files.
+# Group-name of the group that will own the taskwarrior files.
 #
 # Example:
 #   taskwarrior_group: "group1"
@@ -30,18 +30,18 @@ taskwarrior_config_file: "{{ lookup('env', 'HOME') }}/.taskrc"
 # doca tag:other
 taskwarrior_group: "{{ lookup('env', 'USER') }}"
 
-# Username for that will ownt the taskwarrior files.
+# Username for that will own the taskwarrior files.
 #
 # Example:
-#   taskwarrior_uwer: "john"
+#   taskwarrior_user: "john"
 #
 # doca tag:other
 taskwarrior_user: "{{ lookup('env', 'USER') }}"
 
-# Path to the taskwarrior directorye where data and configuration
+# Path to the taskwarrior directory where data and configuration
 # files are stored.
 #
-# This is usuall the subdirectory `.task` in the home directory
+# This usually is the subdirectory `.task` in the home directory
 # of the current user.
 #
 # Example:
@@ -73,10 +73,10 @@ taskwarrior_contexts: {}
 # doca tag:role
 taskwarrior_context_default: ''
 
-# Sets the name of the alternative colorset
+# Sets the name of the alternative color-set
 # that taskwarrior will use.
 #
-# The colorset can be selected from one of these
+# The color-set can be selected from one of these
 # values:
 #
 # * light-16.theme
@@ -97,10 +97,10 @@ taskwarrior_context_default: ''
 # Example:
 #   taskwarrior_color_set: "light-16.theme"
 #
-# doca tag:other type:str
+# doca tag:other
 taskwarrior_color_set: ''
 
-# Dictinary with the configuration for taskwarrior.
+# Dictionary with the configuration for taskwarrior.
 #
 # Each entry requires a field `setting` and a field `value`.
 # An additional field `comment` can be set as well, which then
@@ -113,7 +113,7 @@ taskwarrior_color_set: ''
 #       value: !!str no
 #       comment: Setting the search to case insensitive.
 #
-# doca tag:role
+# doca tag:role type:dict
 taskwarrior_config: {}
 
 # If set to `true` this parameter will allow to overwrite

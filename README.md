@@ -12,7 +12,7 @@ An Ansible role to install and manage [Taskwarrior](https://taskwarrior.org) on 
 taskwarrior_config: dict
 ```
 
-* Dictinary with the configuration for taskwarrior.
+* Dictionary with the configuration for taskwarrior.
 
 ```yaml
 taskwarrior_config_file: str
@@ -36,7 +36,7 @@ taskwarrior_contexts: dict
 taskwarrior_package: list
 ```
 
-* defaults file for taskwarrior List of packages to install for taskwarrior.
+* defaults file for Taskwarrior List of packages to install for Taskwarrior.
 
 ## Other variables
 
@@ -44,7 +44,7 @@ taskwarrior_package: list
 taskwarrior_color_set: str
 ```
 
-* Sets the name of the alternative colorset that taskwarrior will use.
+* Sets the name of the alternative color-set that taskwarrior will use.
 
 ```yaml
 taskwarrior_config_file_overwrite: bool
@@ -56,13 +56,13 @@ taskwarrior_config_file_overwrite: bool
 taskwarrior_data_dir: str
 ```
 
-* Path to the taskwarrior directorye where data and configuration files are stored.
+* Path to the taskwarrior directory where data and configuration files are stored.
 
 ```yaml
 taskwarrior_group: str
 ```
 
-* Groupname of the group that will own the taskwarrior files.
+* Group-name of the group that will own the taskwarrior files.
 
 ```yaml
 taskwarrior_skip_bash_completion: bool
@@ -74,7 +74,7 @@ taskwarrior_skip_bash_completion: bool
 taskwarrior_user: str
 ```
 
-* Username for that will ownt the taskwarrior files.
+* Username for that will own the taskwarrior files.
 
 ## Dependencies
 

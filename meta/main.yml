@@ -3,7 +3,7 @@ dependencies: []
 galaxy_info:
   author: Daniel Buøy-Vehn
   company: ''
-  description: No description.
+  description: Setup and installation of Taskwarrior on a host.
   galaxy_tags: []
   license: BSD
   min_ansible_version: '2.4'
