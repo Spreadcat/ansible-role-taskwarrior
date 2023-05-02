@@ -1,58 +1,135 @@
 ---
-# defaults file for taskwarrior
+# defaults file for Taskwarrior
+
+# List of packages to install for Taskwarrior.
 #
+# Example:
+#   taskwarrior_package:
+#     - task
+#     - vit
+#
+# doca tag:role
 taskwarrior_package:
   - task
   - vit
 
-# Path to the task configuration file
+# Path to the task configuration file.
+#
+# Example:
+#
+#   taskwarrior_config_file: "~/.taskrc"
+#
+# doca tag:role
 taskwarrior_config_file: "{{ lookup('env', 'HOME') }}/.taskrc"
 
+# Group-name of the group that will own the taskwarrior files.
+#
+# Example:
+#   taskwarrior_group: "group1"
+#
+# doca tag:other
 taskwarrior_group: "{{ lookup('env', 'USER') }}"
 
-# User for task
+# Username for that will own the taskwarrior files.
+#
+# Example:
+#   taskwarrior_user: "john"
+#
+# doca tag:other
 taskwarrior_user: "{{ lookup('env', 'USER') }}"
 
-# Location of the data directory for task
+# Path to the taskwarrior directory where data and configuration
+# files are stored.
+#
+# This usually is the subdirectory `.task` in the home directory
+# of the current user.
+#
+# Example:
+#   taskwarrior_data_dir: "~/.task"
+#
+# doca tag:other
 taskwarrior_data_dir: "{{ lookup('env', 'HOME') }}/.task"
 
 # contexts for Taskwarrior to configure
 # can be either list, list or mixed:
-# Example
-# taskwarrior_contexts:
-#   - context_a
-#   - context_b
-#   - name: context_c
-#     tags: +alias_1 or +alias_2 or +alias_3
+#
+# Example:
+#   taskwarrior_contexts:
+#     - context_a
+#     - context_b
+#     - name: context_c
+#       tags: +alias_1 or +alias_2 or +alias_3
+#
+# doca tag:role
 taskwarrior_contexts: {}
 
-# Default context, must be an element of taskwarrior_contexts
+# Sets the default context that taskwarrior will start in.
+#
+# Context must be an element of `taskwarrior_contexts`.
+#
+# Example:
+#   taskwarrior_context_default: "context_a"
+#
+# doca tag:role
 taskwarrior_context_default: ''
 
-# Alternative color set to use
-# select from these values:
+# Sets the name of the alternative color-set
+# that taskwarrior will use.
 #
-# light-16.theme
-# light-256.theme
-# dark-16.theme
-# dark-256.theme
-# dark-red-256.theme
-# dark-green-256.theme
-# dark-blue-256.theme
-# dark-violets-256.theme
-# dark-yellow-green.theme
-# dark-gray-256.theme
-# dark-gray-blue-256.theme
-# solarized-dark-256.theme
-# solarized-light-256.theme
-# no-color.theme
+# The color-set can be selected from one of these
+# values:
+#
+# * light-16.theme
+# * light-256.theme
+# * dark-16.theme
+# * dark-256.theme
+# * dark-red-256.theme
+# * dark-green-256.theme
+# * dark-blue-256.theme
+# * dark-violets-256.theme
+# * dark-yellow-green.theme
+# * dark-gray-256.theme
+# * dark-gray-blue-256.theme
+# * solarized-dark-256.theme
+# * solarized-light-256.theme
+# * no-color.theme
+#
+# Example:
+#   taskwarrior_color_set: "light-16.theme"
+#
+# doca tag:other
 taskwarrior_color_set: ''
 
-# Default config for taskwarrior
+# Dictionary with the configuration for taskwarrior.
+#
+# Each entry requires a field `setting` and a field `value`.
+# An additional field `comment` can be set as well, which then
+# will add a comment with the same value to the configuration file
+# about the setting.
+#
+# Example:
+#   taskwarrior_config:
+#     - setting: search.case.sensitive
+#       value: !!str no
+#       comment: Setting the search to case insensitive.
+#
+# doca tag:role type:dict
 taskwarrior_config: {}
 
-# Allow to overwrite an existing config file
+# If set to `true` this parameter will allow to overwrite
+# any existing configuration file.
+#
+# Example:
+#   taskwarrior_config_file_overwrite: true
+#
+# doca tag:other
 taskwarrior_config_file_overwrite: true
 
-# Skip installing bash complettion
+# If set to true, the role will not install the
+# bash completion script.
+#
+# Example:
+#   taskwarrior_skip_bash_completion: true
+#
+# doca tag:other
 taskwarrior_skip_bash_completion: false
