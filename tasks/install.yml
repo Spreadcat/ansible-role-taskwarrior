@@ -1,14 +1,14 @@
 ---
-- name: INCLUDE UBUNTU INSTALL
+- name: Install | Include install ubuntu tasks.
   ansible.builtin.include_tasks: install_ubuntu.yml
   when: ansible_distribution|lower == 'ubuntu'
 
-- name: MANAGE PACKAGES
+- name: Install | Manage packages.
   become: true
   ansible.builtin.package:
     name: "{{ taskwarrior_package }}"
 
-- name: MANAGE DIRECTORIES
+- name: Install | Manage directories.
   ansible.builtin.file:
     state: directory
     path: "{{ taskwarrior_data_dir }}"
@@ -16,7 +16,7 @@
     group: "{{ taskwarrior_group }}"
     mode: '0755'
 
-- name: INSTALL BASH COMPLETION
+- name: Install | Install bash complection.
   become: true
   ansible.builtin.copy:
     src: files/tasks.sh

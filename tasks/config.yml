@@ -1,5 +1,5 @@
 ---
-- name: MANAGE CONFIGURATION
+- name: COnfig | Manage configuration.
   ansible.builtin.template:
     force: "{{ taskwarrior_config_file_overwrite }}"
     dest: "{{ taskwarrior_config_file }}"

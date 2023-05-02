@@ -8,77 +8,73 @@ An Ansible role to install and manage [Taskwarrior](https://taskwarrior.org) on 
 
 ## Role Variables
 
-See `./defaults/main.yml` for usage examples.
-
 ```yaml
-taskwarrior_data_dir: "{{ lookup('env', 'HOME') }}/.task"
+taskwarrior_config: dict
 ```
 
-* String with the path to the location of the datadir for Taskwarrior.
+* Dictinary with the configuration for taskwarrior.
 
 ```yaml
-taskwarrior_contexts:: {}
+taskwarrior_config_file: str
 ```
 
-* List with either the strings of contexts or dictionaries with context names and related tags for Taskwarrior.
+* Path to the task configuration file.
 
 ```yaml
-taskwarrior_context_default: ""
+taskwarrior_context_default: str
 ```
 
-* String with the default context.
+* Sets the default context that taskwarrior will start in.
 
 ```yaml
-taskwarrior_config:
+taskwarrior_contexts: dict
 ```
 
-* Dictionary with the configuration settings for taskwarrior.
+* contexts for Taskwarrior to configure can be either list, list or mixed:
+
+```yaml
+taskwarrior_package: list
+```
+
+* defaults file for taskwarrior List of packages to install for taskwarrior.
 
 ## Other variables
 
 ```yaml
-taskwarrior_package:
-  - task
-  - vit
+taskwarrior_color_set: str
 ```
 
-* List of packages to install for taskwarrior.
+* Sets the name of the alternative colorset that taskwarrior will use.
 
 ```yaml
-taskwarrior_config_file: "{{ lookup('env', 'HOME') }}/.taskrc"
+taskwarrior_config_file_overwrite: bool
 ```
 
-* String with the path to the location of the Taskwarrior configuration file.
+* If set to `true` this parameter will allow to overwrite any existing configuration file.
 
 ```yaml
-taskwarrior_group: "{{ lookup('env', 'USER') }}"
+taskwarrior_data_dir: str
 ```
 
-* Name of the group of the user that is using Taskwarrior.
+* Path to the taskwarrior directorye where data and configuration files are stored.
 
 ```yaml
-taskwarrior_user: "{{ lookup('env', 'USER') }}"
+taskwarrior_group: str
 ```
 
-* String with the username of the user that is using Taskwarrior.
+* Groupname of the group that will own the taskwarrior files.
 
 ```yaml
-taskwarrior_color_set: ""
+taskwarrior_skip_bash_completion: bool
 ```
 
-* String with the color set to use for Taskwarrior.
+* If set to true, the role will not install the bash completion script.
 
 ```yaml
-taskwarrior_config_file_overwrite: true
+taskwarrior_user: str
 ```
 
-* Boolean to allow to overwrite any existing configuration file for Taskwarrior.
-
-```yaml
-taskwarrior_skip_bash_completion: false
-```
-
-* Boolean that will skip the installation of the bash-completion for taskwarrior when set to `true`.
+* Username for that will ownt the taskwarrior files.
 
 ## Dependencies
 
@@ -94,7 +90,7 @@ Including an example of how to use your role (for instance, with variables passe
   vars:
     var1: value1
   roles:
-     - role: spreadcat.rolename
+     - role: spreadcat.taskwarrior
 ```
 
 ## License
