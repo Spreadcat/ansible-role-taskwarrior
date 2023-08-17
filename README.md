@@ -4,7 +4,7 @@ An Ansible role to install and manage [Taskwarrior](https://taskwarrior.org) on 
 
 ## Requirements
 
-* None
+* The role requires `gathered_facts: true` to be set.
 
 ## Role Variables
 
