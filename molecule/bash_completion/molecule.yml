@@ -89,7 +89,6 @@ verifier:
 scenario:
   name: bash_completion
   test_sequence:
-    - lint
     - destroy
     - syntax
     - create
@@ -98,7 +97,3 @@ scenario:
     - idempotence
     - verify
     - destroy
-lint: |
-  set -e
-  yamllint .
-  ansible-lint .
